@@ -26,7 +26,7 @@ class Calculator {
 
         if (e.target.hasAttribute('data-operand')) {
             var arr = this.result.textContent.split('');
-            if(isNaN(arr[arr.length - 1])){
+            if (isNaN(arr[arr.length - 1])){
                 return;
             }
             this._addText(e.target.textContent);
