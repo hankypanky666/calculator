@@ -17,38 +17,38 @@ class Calculator {
         this._tempArr = [];
         this._status = '';
 
-        this.container.addEventListener('click', function (e) {
+        this.container.addEventListener('click', this._takeTargetClickFromCalc.bind(this));
+    }
 
-            if (e.target.hasAttribute('data-digit')) {
-                if (this.result.textContent == this._tempResult) {
-                    this.result.textContent = '';
-                }
-                this.result.textContent += e.target.textContent;
+    _takeTargetClickFromCalc(e) {
+        if (e.target.hasAttribute('data-digit')) {
+            if (this.result.textContent == this._tempResult) {
+                this.result.textContent = '';
             }
+            this.result.textContent += e.target.textContent;
+        }
 
-            /*
-                если предидущий оператор не совпадает с текущим,
-                то отправляем на операцию со старым оператором
-             */
-            if (e.target.hasAttribute('data-operator')) {
-                this._tempArr.push(this.result.textContent);
-                if (e.target.textContent !== this._status) {
-                    this._returnResult(this._tempArr[0], (this._tempArr.length === 1 ? 0 : this._tempArr[1]), this._status);
-                }
-                this._returnResult(this._tempArr[0], (this._tempArr.length === 1 ? 0 : this._tempArr[1]), e.target.textContent);
-                this.result.textContent = this._tempResult;
-                this._status = e.target.textContent;
+        /*
+         если предидущий оператор не совпадает с текущим,
+         то отправляем на операцию со старым оператором
+         */
+        if (e.target.hasAttribute('data-operator')) {
+            this._tempArr.push(this.result.textContent);
+            if (e.target.textContent !== this._status) {
+                this._returnResult(this._tempArr[0], (this._tempArr.length === 1 ? 0 : this._tempArr[1]), this._status);
             }
+            this._returnResult(this._tempArr[0], (this._tempArr.length === 1 ? 0 : this._tempArr[1]), e.target.textContent);
+            this.result.textContent = this._tempResult;
+            this._status = e.target.textContent;
+        }
 
-            if (e.target.hasAttribute('data-clear')) {
-                this._clearCalc();
-            }
+        if (e.target.hasAttribute('data-clear')) {
+            this._clearCalc();
+        }
 
-            if (e.target.hasAttribute('data-result')) {
-                this._result();
-            }
-
-        }.bind(this));
+        if (e.target.hasAttribute('data-result')) {
+            this._result();
+        }
     }
 
     _add(a, b) {
