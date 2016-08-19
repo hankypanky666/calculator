@@ -1,0 +1,23 @@
+#calc {
+    margin: 0 auto;
+    float: none;
+    min-height: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+}
+
+td {
+    padding: 0 !important;
+}
+
+.btn {
+    border-radius: 0 !important;
+}
+
+td.result {
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+}
